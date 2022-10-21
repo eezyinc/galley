@@ -15,8 +15,8 @@
 # address.
 echo "# Creating droplet"
 doctl compute droplet create --region $G_REGION --image $G_IMAGE --size $G_SIZE --ssh-keys $G_KEY --wait $G_HOST > /dev/null
-echo "# Waiting 30 seconds for droplet to be ready..."
-sleep 30
+echo "# Waiting $G_SLEEP seconds for droplet to be ready..."
+sleep $G_SLEEP
 G_IP=`doctl compute droplet list | grep $G_HOST | awk '{ print $3 }'`
 
 # ssh quietly and skip strict key checking as Digital Ocean reuses IP addresses

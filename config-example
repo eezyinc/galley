@@ -20,6 +20,11 @@ G_REGION=sfo2
 # c-4 is CPU optimized, 4 CPUs, $84/mo in Oct 2022
 # See 'doctl compute size list' for more options
 G_SIZE=c-2
+#
+# How long to sleep to allow droplet time to complete setup--30 seconds seems
+# to work well, but if ssh times out or apt complains about another process
+# having a lock you should increase this
+G_SLEEP=30
 ## Digital Ocean end ##
 
 # Packages to install before we can cook
