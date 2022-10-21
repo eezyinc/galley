@@ -1,0 +1,6 @@
+#!/bin/sh
+
+[ -f $HOME/.config/galley ] || { echo "missing '~/.config/galley'--maybe copy 'config-example'?"; exit 1; }
+. $HOME/.config/galley
+
+doctl compute droplet delete $G_HOST

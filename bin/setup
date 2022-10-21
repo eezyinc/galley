@@ -1,0 +1,36 @@
+#!/bin/sh
+
+[ -f $HOME/.config/galley ] || { echo "missing '~/.config/galley'--maybe copy 'config-example'?"; exit 1; }
+. $HOME/.config/galley
+
+# We ignore the output of the create command because it sometimes returns
+# the previous IP address of $G_HOST.
+#
+# We sleep because the new host isn't ready right away to accept ssh
+# connections and so we don't conflict with the host running apt on itself
+# at startup.
+#
+# We sleep before getting the IP address as it doesn't slow things down
+# and gives Digital Ocean a little more time to ascertain the correct IP
+# address.
+doctl compute droplet create --region $G_REGION --image $G_IMAGE --size $G_SIZE --ssh-keys $G_KEY --wait $G_HOST > /dev/null
+sleep 30
+G_IP=`doctl compute droplet list | grep $G_HOST | awk '{ print $3 }'`
+
+# ssh quietly and skip strict key checking as Digital Ocean reuses IP addresses
+GS="ssh -q -o StrictHostKeyChecking=no root@$G_IP"
+
+# Install packages
+$GS "export DEBIAN_FRONTEND=noninteractive ; mkdir $G_DIR; apt-get -qqy update; apt-get -qy install $G_PKG > $G_DIR/apt.log 2>&1"
+
+# Set up repo. 'touch .hushlogin' suppresses login messages for interactive
+# sessions--it is unrelated to setting up the repo; it's just here to save an
+# additional ssh session
+$GS "touch .hushlogin ; cd $G_DIR ; git clone -b $G_BRANCH --recurse-submodules $G_REPO > $G_DIR/git.log 2>&1"
+
+# Set up a tmux session on the build server and start the build
+$GS "tmux new -d -s Builder"
+$GS "tmux send-keys -t Builder.0 'cd /build/seastar ; ./cooking.sh | tee build.log' ENTER"
+
+echo "# Use 'tmux attach' to connect to build session"
+echo $GS
