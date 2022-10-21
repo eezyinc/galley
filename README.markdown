@@ -1,8 +1,8 @@
 # Galley 
 
 Set up a [cooking](https://github.com/scylladb/seastar/blob/master/HACKING.md)
-build environment for [Seastar](https://github.com/scylladb/seastar) on Digital
-Ocean.
+build environment for [Seastar](https://github.com/scylladb/seastar) with
+Ubuntu on Digital Ocean.
 
 ## Configuration
 
