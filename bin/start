@@ -36,8 +36,8 @@ $GS "cd $G_DIR; git clone -b $G_BRANCH --recurse-submodules $G_REPO > $G_DIR/git
 
 echo "# Starting build in tmux session -- see $G_DIR/build.log"
 echo "# or use 'tmux attach' to connect to build session"
-$GS "tmux new -d -s Galley"
-$GS "tmux send-keys -t Galley.0 'cd /build/seastar; ./cooking.sh | tee ../build.log' ENTER"
+$GS tmux new -d -s Galley
+$GS tmux send-keys -t Galley.0 "cd\ $G_DIR/seastar\;\ ./cooking.sh\ \|\ tee\ $G_DIR/build.log" ENTER
 
 # Provide the ssh command as our uncommented output
 echo $GS
