@@ -7,18 +7,20 @@ G_REPO=https://github.com/scylladb/seastar.git
 # Build root directory
 G_DIR=/build
 
-# Digital Ocean begin #
+## Digital Ocean begin ##
 G_HOST=galley
 G_IMAGE=ubuntu-20-04-x64
 #
 # md5 hash of a public ssh key uploaded to your Digital Ocean account
+# See README.markdown for more details
 G_KEY=''
 G_REGION=sfo2
 #
-# c-4 is CPU optimized, 4 CPUs, currently $84/mo
-# c-1 is 1 CPU for $24/mo, c-2 is 2 CPUs for $48/mo
-G_SIZE=c-4
-# Digital Ocean end #
+# c-2 is CPU optimized, 2 CPUs, $42/mo in Oct 2022
+# c-4 is CPU optimized, 4 CPUs, $84/mo in Oct 2022
+# See 'doctl compute size list' for more options
+G_SIZE=c-2
+## Digital Ocean end ##
 
 # Packages to install before we can cook
 G_PKG='autogen cmake g++ guile-2.2 libidn11-dev libnuma-dev libtool libunbound-dev m4 ninja-build pkg-config stow trousers xutils-dev'
