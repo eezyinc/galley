@@ -30,7 +30,7 @@ $GS "touch .hushlogin ; cd $G_DIR ; git clone -b $G_BRANCH --recurse-submodules 
 
 # Set up a tmux session on the build server and start the build
 $GS "tmux new -d -s Builder"
-$GS "tmux send-keys -t Builder.0 'cd /build/seastar ; ./cooking.sh | tee build.log' ENTER"
+$GS "tmux send-keys -t Builder.0 'cd /build/seastar ; ./cooking.sh | tee ../build.log' ENTER"
 
 echo "# Use 'tmux attach' to connect to build session"
 echo $GS
