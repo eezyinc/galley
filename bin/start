@@ -1,11 +1,11 @@
 #!/bin/sh
 
-[ -f $HOME/.config/galley ] || \
-    { echo "missing '~/.config/galley'--copy 'config-example'?"; exit 1; }
-. $HOME/.config/galley
+[ -f $HOME/.config/galley/etc/$1 ] || \
+    { echo "missing ~/.config/galley/lib/$1--copy 'config-example'?"; exit 1; }
+. $HOME/.config/galley/etc/$1
 
 # We ignore the output of the create command because it sometimes returns
-# the previous IP address of $G_HOST.
+# the previous IP address of $host.
 #
 # We sleep because the new host isn't ready right away to accept ssh
 # connections and so we don't conflict with the host running apt on itself
@@ -14,33 +14,33 @@
 # We sleep before getting the IP address as it doesn't slow things down
 # and gives Digital Ocean a little more time to ascertain the correct IP
 # address.
-echo "# Creating droplet $G_IMAGE $G_SIZE $G_HOST"
-doctl compute droplet create --region $G_REGION --image $G_IMAGE \
-    --size $G_SIZE --ssh-keys $G_KEY --wait $G_HOST > /dev/null
+echo "# Creating droplet $image $size $host"
+doctl compute droplet create --region $region --image $image \
+    --size $size --ssh-keys $key --wait $host > /dev/null
 
-echo "# Waiting $G_SLEEP seconds for droplet to be ready..."
-sleep $G_SLEEP
+echo "# Waiting $sleep seconds for droplet to be ready..."
+sleep $sleep
 
 printf '%s' "# Finding IP address"
-G_IP=`doctl compute droplet list | grep $G_HOST | awk '{ print $3 }'`
-echo ": $G_IP"
+ip=`doctl compute droplet list | grep $host | awk '{ print $3 }'`
+echo ": $ip"
 
 # Connect quietly and skip strict key because IP address reuse
-GS="ssh -q -o StrictHostKeyChecking=no root@$G_IP"
+ssh="ssh -q -o StrictHostKeyChecking=no root@$ip"
 
 echo "# Suppressing login messages for interactive sessions and creating build directory"
-$GS "touch .hushlogin; mkdir -p $G_DIR"
+$ssh "touch .hushlogin; mkdir -p $dir"
 
-echo "# Installing packages -- see $G_DIR/apt.log"
-$GS "export DEBIAN_FRONTEND=noninteractive; apt-get -qqy update; apt-get -qy install $G_PKG > $G_DIR/apt.log 2>&1"
+echo "# Installing packages -- see $dir/apt.log"
+$ssh "export DEBIAN_FRONTEND=noninteractive; apt-get -qqy update; apt-get -qy install $pkg > $dir/apt.log 2>&1"
 
-echo "# Cloning Seastar -- see $G_DIR/git.log"
-$GS "cd $G_DIR; git clone -b $G_BRANCH --recurse-submodules $G_REPO > $G_DIR/git.log 2>&1"
+echo "# Cloning Seastar -- see $dir/git.log"
+$ssh "cd $dir; git clone -b $branch --recurse-submodules $repo > $dir/git.log 2>&1"
 
-echo "# Starting build in tmux session -- see $G_DIR/build.log"
+echo "# Starting build in tmux session -- see $dir/build.log"
 echo "# or use 'tmux attach' to connect to build session"
-$GS tmux new -d -s Galley
-$GS tmux send-keys -t Galley.0 "cd\ $G_DIR/seastar\;\ ./cooking.sh\ \|\ tee\ $G_DIR/build.log" ENTER
+$ssh tmux new -d -s Galley
+$ssh tmux send-keys -t Galley.0 "cd\ $dir/seastar\;\ ./cooking.sh\ \|\ tee\ $dir/build.log" ENTER
 
 # Provide the ssh command as our uncommented output
-echo $GS
+echo $ssh
