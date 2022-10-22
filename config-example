@@ -14,7 +14,7 @@ G_IMAGE=ubuntu-22-04-x64
 # md5 hash of a public ssh key uploaded to your Digital Ocean account
 # See README.markdown for more details
 G_KEY=''
-G_REGION=sfo2
+G_REGION=sfo3
 #
 # c-2  is CPU optimized, 2 CPUs, $42/mo in Oct 2022
 # c-4  is CPU optimized, 4 CPUs, $84/mo in Oct 2022
