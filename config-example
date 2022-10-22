@@ -9,15 +9,16 @@ G_DIR=/build
 
 ## Digital Ocean begin ##
 G_HOST=galley
-G_IMAGE=ubuntu-20-04-x64
+G_IMAGE=ubuntu-22-04-x64
 #
 # md5 hash of a public ssh key uploaded to your Digital Ocean account
 # See README.markdown for more details
 G_KEY=''
 G_REGION=sfo2
 #
-# c-2 is CPU optimized, 2 CPUs, $42/mo in Oct 2022
-# c-4 is CPU optimized, 4 CPUs, $84/mo in Oct 2022
+# c-2  is CPU optimized, 2 CPUs, $42/mo in Oct 2022
+# c-4  is CPU optimized, 4 CPUs, $84/mo in Oct 2022
+# c-48 is CPU optimized, 48 CPUS, $1500/mo in Oct 2022
 # See 'doctl compute size list' for more options
 G_SIZE=c-2
 #
