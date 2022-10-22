@@ -1,7 +1,7 @@
 #!/bin/sh
 
 [ -f $HOME/.config/galley/etc/$1 ] || \
-    { echo "missing ~/.config/galley/lib/$1--copy 'config-example'?"; exit 1; }
+    { echo "missing ~/.config/galley/etc/$1--copy 'example'?"; exit 1; }
 . $HOME/.config/galley/etc/$1
 
 # We ignore the output of the create command because it sometimes returns
@@ -28,7 +28,7 @@ echo ": $ip"
 # Connect quietly and skip strict key because IP address reuse
 ssh="ssh -q -o StrictHostKeyChecking=no root@$ip"
 
-echo "# Suppressing login messages for interactive sessions and creating build directory"
+echo "# Suppressing login messages and creating build directory"
 $ssh "touch .hushlogin; mkdir -p $dir"
 
 echo "# Installing packages -- see $dir/apt.log"

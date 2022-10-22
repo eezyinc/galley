@@ -14,7 +14,8 @@ your config. You can get the md5 hash
 [here](https://cloud.digitalocean.com/account/security).
 
 You will also need
-[doctl](https://docs.digitalocean.com/reference/doctl/how-to/install) set up.
+[doctl](https://docs.digitalocean.com/reference/doctl/how-to/install)
+installed.
 
 ## Usage
 
