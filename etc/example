@@ -1,4 +1,5 @@
 # example config for Galley
+#
 
 . $path/etc/defaults
 
@@ -6,3 +7,7 @@ host=example
 
 branch=main
 repo=https://github.com/fuzz/galley.git
+
+# Spaces and other special characters *must* be escaped and
+# double quoted
+cmd="cat\ README.markdown"

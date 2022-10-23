@@ -1,16 +1,15 @@
 # etc/defaults -- You can source this in your configs and then
-# override variables as you wish--see etc/example for an example. 
+# override variables as you wish--see etc/example for an example
 #
 
-# Note that specifying the branch is required.
-#
-# branch=main
-# https://github.com/fuzz/galley.git
-branch=
-repo=
+# Specifying a branch is almost required; galley will not figure out the git
+# branch you want to build unless it is main
+branch=main
+repo=https://github.com/fuzz/galley.git
 
-# Build command
-cmd=
+# Spaces and other special characters *must* be escaped and
+# double quoted
+cmd="ls\ -alh"
 
 # Build root directory
 dir=/build

@@ -11,9 +11,9 @@ rdir=`cut -d "/" -f5 <<< $repo | cut -d "." -f1`
 # We ignore the output of the create command because it sometimes returns
 # the previous IP address of $host.
 #
-# We sleep because the new host isn't ready right away to accept ssh
-# connections and so we don't conflict with the host running apt on itself
-# at startup.
+# We sleep because the new $host isn't ready right away to accept ssh
+# connections and so we don't conflict with the $host running apt on itself at
+# startup.
 #
 # We sleep before getting the IP address as it doesn't slow things down
 # and gives Digital Ocean a little more time to ascertain the correct IP
@@ -22,7 +22,7 @@ echo "# Creating droplet $image $size $host"
 doctl compute droplet create --region $region --image $image \
     --size $size --ssh-keys $key --wait $host > /dev/null
 
-echo "# Waiting $sleep seconds for droplet to be ready..."
+echo "# Waiting $sleep seconds for $host to be ready..."
 sleep $sleep
 
 printf '%s' "# Finding IP address"
