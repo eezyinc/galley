@@ -8,6 +8,6 @@ host=example
 branch=main
 repo=https://github.com/fuzz/galley.git
 
-# Spaces and other special characters *must* be escaped and
-# double quoted
+# Build command--spaces and other special characters *must* be escaped and
+# double quoted if used
 cmd="cat\ README.markdown"

@@ -14,6 +14,6 @@ repo=https://github.com/fuzz/seastar.git
 # branch=master
 # repo=https://github.com/scylladb/seastar.git
 
-# Build commmand--spaces and other special characters *must* be escaped and
+# Build command--spaces and other special characters *must* be escaped and
 # double quoted if used--see 'etc/example'
 cmd=./cooking.sh
