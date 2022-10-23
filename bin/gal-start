@@ -36,15 +36,18 @@ echo "# Suppressing login messages and creating build directory"
 $ssh "touch .hushlogin; mkdir -p $dir"
 
 echo "# Installing packages -- see $dir/apt.log"
-$ssh "export DEBIAN_FRONTEND=noninteractive; apt-get -qqy update; apt-get -qy install $pkg > $dir/apt.log 2>&1"
+df="export DEBIAN_FRONTEND=noninteractive"
+$ssh "$df; apt-get -qqy update; apt-get -qy install $pkg > $dir/apt.log 2>&1"
 
 echo "# Cloning $repo -- see $dir/git.log"
-$ssh "cd $dir; git clone -b $branch --recurse-submodules $repo > $dir/git.log 2>&1"
+rs="--recurse-submodules"
+$ssh "cd $dir; git clone -b $branch $rs $repo > $dir/git.log 2>&1"
 
 echo "# Starting build in tmux session -- see $dir/build.log"
 echo "# or use 'tmux attach' to connect to build session"
 $ssh tmux new -d -s Galley
-$ssh tmux send-keys -t Galley.0 "cd\ $dir/$rdir\;\ $cmd\ \|\ tee\ $dir/build.log" ENTER
+$ssh tmux send-keys -t Galley.0 \
+    "cd\ $dir/$rdir\;\ $cmd\ \|\ tee\ $dir/build.log" ENTER
 
 # Provide the ssh command as our uncommented output
 echo $ssh
