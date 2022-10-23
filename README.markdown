@@ -28,6 +28,11 @@ installed.
 
 You may wish to link or copy `bin/gal` into your `PATH` for convenience.
 
+If you fork the project and only add files (don't modify the included files)
+you can easily manage your configs in the same repo without worrying about
+merge conflicts when syncing with the upstream repo. If you want to change
+defaults copy `etc/defaults` to a new file and source that one instead.
+
 ## 💣 Alert 🚨
 
 Do not use Galley for production systems. Also do not forget to
@@ -57,7 +62,7 @@ prefer.
 
 ### ls
 
-`gal l` is an alias for `doctl compute droplet ls` and will list all your
+`gal l` is an alias for `doctl compute droplet ls` that will list all your
 current droplets and their IDs. You can delete a droplet by passing its
 ID to `gal rm`.
 

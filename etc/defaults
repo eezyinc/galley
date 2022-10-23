@@ -1,5 +1,13 @@
-# etc/defaults -- You can source this in your configs and then
-# override variables as you wish--see etc/example for an example.
+# etc/defaults -- Source this in your configs and then override variables as
+# you wish--see etc/example for an example. If you desire different default
+# values it is advised to either
+#
+# 1. copy this file, make changes there and source that in your configs instead
+# 2. source this file in another file, make changes there, source that instead
+#
+# the latter option being preferred as future upstream additions to this file
+# will be passed through. Or just make changes here and deal with merge
+# conflicts.
 #
 
 # Root directory
@@ -14,7 +22,6 @@ bdir=galley
 # branch you want to build unless it is main (or you change the default here)
 branch=main
 repo=https://github.com/fuzz/galley.git
-
 
 # Build command--spaces and other special characters *must* be escaped and
 # double quoted if used
@@ -42,5 +49,5 @@ size=c-2
 sleep=30
 ## Digital Ocean end ##
 
-# Packages to install before we can build
+# Packages to install prior to build
 pkg=
