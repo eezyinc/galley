@@ -25,6 +25,15 @@ installed.
 
 You may wish to link or copy `bin/gal` into your `PATH` for convenience.
 
+## 🚨 Alert 💣
+
+These scripts are not battle hardened--in fact they're full of `grep`s and
+`cuts` and wishful `sleep`s. Do not use them for production systems; don't even
+use them on the same Digital Ocean account used for your production systems. I
+don't run any production systems on Digital Ocean so I use Galley confident I
+can't possibly do anything worse than run up an eye-watering bill forgetting to
+shut down a 48-CPU build host.
+
 ## Usage
 
 `gal s example` and `gal d example` should work without further configuration
