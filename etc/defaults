@@ -5,7 +5,7 @@
 # Note that specifying the branch is required.
 #
 # branch=main
-# https://github.com/fuzz/galley
+# https://github.com/fuzz/galley.git
 branch=
 repo=
 

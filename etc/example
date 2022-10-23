@@ -5,4 +5,4 @@
 host=example
 
 branch=main
-repo=https://github.com/fuzz/galley
+repo=https://github.com/fuzz/galley.git

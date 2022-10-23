@@ -7,7 +7,7 @@ analog systems administration technology--it's like riding a code velocipede.
 
 ![BBS SysOps managing Their
 Systems](https://pinecab.com/assets/images/velocipede.jpg "Is this
-...Kubernetes?")
+a kubernetes?")
 
 ## Setup
 
