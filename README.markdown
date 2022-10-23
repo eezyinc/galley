@@ -2,7 +2,7 @@
 
 Set up a Linux build environment with Ubuntu on Digital Ocean. Starts a
 droplet, clones your project and initiates the build in a remote `tmux`
-session.
+session. Use 48 CPUs to build while keeping your laptop cool.
 
 ## Setup
 
@@ -18,7 +18,7 @@ You will also need
 [doctl](https://docs.digitalocean.com/reference/doctl/how-to/install)
 installed.
 
-You may want to link or copy `bin/gal` into your `PATH` for convenience.
+You may wish to link or copy `bin/gal` into your `PATH` for convenience.
 
 ## Usage
 
