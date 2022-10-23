@@ -1,7 +1,8 @@
-#/bin/sh
+# example config for Galley
 
-. $HOME/.config/galley/etc/default
+. $path/etc/defaults
 
-# the above is all that's required, but we can also override variables, eg
+host=example
 
-host="example"
+branch=main
+repo=https://github.com/fuzz/galley

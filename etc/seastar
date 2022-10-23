@@ -1,0 +1,17 @@
+# example config for Seastar
+
+. $path/etc/defaults
+
+host=seabuild
+
+# Currently a broken URL for zlib requires using
+branch=seamake
+repo=https://github.com/fuzz/seastar.git
+# branch=master
+# repo=https://github.com/scylladb/seastar.git
+
+cmd=./cooking.sh
+
+size=c-4
+
+pkg='autogen cmake g++ guile-2.2 libidn11-dev libnuma-dev libtool libunbound-dev m4 ninja-build pkg-config stow trousers xutils-dev'

@@ -1,4 +1,5 @@
 #!/bin/sh
+#
 
 path="${GALLEY_PATH:-$HOME/.config/galley}"
 

@@ -1,8 +1,16 @@
-# Currently a broken URL for zlib requires using
-# branch=seamake
-# repo=https://github.com/fuzz/seastar.git
-branch=master
-repo=https://github.com/scylladb/seastar.git
+# etc/defaults -- You can source this in your configs and then
+# override variables as you wish--see etc/example for an example. 
+#
+
+# Note that specifying the branch is required.
+#
+# branch=main
+# https://github.com/fuzz/galley
+branch=
+repo=
+
+# Build command
+cmd=
 
 # Build root directory
 dir=/build
@@ -29,5 +37,5 @@ size=c-2
 sleep=30
 ## Digital Ocean end ##
 
-# Packages to install before we can cook
-pkg='autogen cmake g++ guile-2.2 libidn11-dev libnuma-dev libtool libunbound-dev m4 ninja-build pkg-config stow trousers xutils-dev'
+# Packages to install before we can build
+pkg=
