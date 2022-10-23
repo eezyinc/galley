@@ -4,8 +4,14 @@
 path="${GALLEY_PATH:-$HOME/.config/galley}"
 
 case "$1" in
-    d|destroy) $path/bin/gal-destroy $2
+    d|delete) $path/bin/gal-delete $2
     ;;
     s|start) $path/bin/gal-start $2
+    ;;
+    l|ls) doctl compute droplet ls
+    ;;
+    r|rm) doctl compute droplet delete $2
+    ;;
+    *) echo "gal: command not recognized"
     ;;
 esac

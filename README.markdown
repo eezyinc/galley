@@ -9,6 +9,8 @@ analog systems administration technology--it's like riding a code velocipede.
 Systems](https://pinecab.com/assets/images/velocipede.jpg "Is this
 a kubernetes?")
 
+__100% Certified Organic POSIX!__
+
 ## Setup
 
 Galley is meant to be cloned into `~/.config/galley`, but you may set
@@ -28,19 +30,15 @@ You may wish to link or copy `bin/gal` into your `PATH` for convenience.
 
 ## 💣 Alert 🚨
 
-These scripts are not battle hardened--in fact they're full of `grep`s and
-`cut`s and wishful `sleep`s. Do not use them for production systems; don't even
-use them on the same Digital Ocean account used for your production systems. I
-don't run any production systems on Digital Ocean so I use Galley confident I
-can't possibly do anything worse than run up an eye-watering bill forgetting to
-shut down a 48-CPU build host.
+Do not use Galley for production systems. Also do not forget to
+turn off that 48-CPU build host when you're finished with it.
 
 ## Usage
 
 `gal s example` and `gal d example` should work without further configuration
 if you have a valid `GALLEY_KEY` in your environment, but you probably at least
-want to configure a project to build and use a droplet with more CPUs. For that
-you use a config--see `etc/seastar` for an example config that creates a
+want to configure a project to build and use a droplet with more CPUs. See
+`etc/seastar` for an example config that creates a
 [cooking](https://github.com/scylladb/seastar/blob/master/HACKING.md)
 environment for [Seastar](https://github.com/scylladb/seastar).
 
@@ -53,9 +51,17 @@ connect to the server will be provided when `gal start` completes. Use `tmux
 attach` to connect to the build session or `tail -f /build/build.log` if you
 prefer.
 
-### destroy
+### delete
 
-`gal d <config>` will destroy the Digital Ocean droplet started by `gal start`.
-Note if you run `gal start` on a config more than once before running `gal
-destroy` it will create multiple droplets and you will have to destroy them
-manually--the droplet IDs will be provided in `gal destroy`'s error message.
+`gal d <config>` will delete the Digital Ocean droplet started by `gal start`.
+
+### ls
+
+`gal l` is an alias for `doctl compute droplet ls` and will list all your
+current droplets and their IDs. You can delete a droplet by passing its
+ID to `gal rm`.
+
+### rm
+
+`gal r <ID>` is an alias for `doctl compute droplet delete <ID>` and will
+delete the droplet specified by the ID. Use `gal ls` to find droplet IDs.

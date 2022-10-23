@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+
+path="${GALLEY_PATH:-$HOME/.config/galley}"
+
+didfile=$path/run/$1.did
+[ -f $didfile ] || \
+    { echo "$didfile not found, try 'gal ls' then 'gal rm ID'"; exit 1; }
+did=$(cat $didfile)
+
+doctl compute droplet delete $did && rm $didfile

@@ -2,13 +2,19 @@
 #
 
 path="${GALLEY_PATH:-$HOME/.config/galley}"
+config=$1
+configfile=$path/etc/$config
+didfile=$path/run/$config.did
 
-[ -f $path/etc/$1 ] || \
-    { echo "missing $path/etc/$1--copy 'example'?"; exit 1; }
-. $path/etc/$1
-rdir=`cut -d "/" -f5 <<< $repo | cut -d "." -f1`
+[ -f $didfile ] && \
+    { echo "$config already running? check $didfile"; exit 1; }
 
-# We ignore the output of the create command because it sometimes returns
+[ -f $configfile ] || \
+    { echo "missing $configfile--copy $path/run/example?"; exit 1; }
+
+. $configfile
+
+# We ignore the IP address from the create command because it sometimes returns
 # the previous IP address of $host.
 #
 # We sleep because the new $host isn't ready right away to accept ssh
@@ -19,14 +25,16 @@ rdir=`cut -d "/" -f5 <<< $repo | cut -d "." -f1`
 # and gives Digital Ocean a little more time to ascertain the correct IP
 # address.
 echo "# Creating droplet $image $size $host"
-doctl compute droplet create --region $region --image $image \
-    --size $size --ssh-keys $key --wait $host > /dev/null
+touch $didfile
+did=`doctl compute droplet create --region $region --image $image \
+    --size $size --ssh-keys $key --wait $host | awk 'NR==2 { print $1 }'`
+echo $did > $didfile
 
 echo "# Waiting $sleep seconds for $host to be ready..."
 sleep $sleep
 
 printf '%s' "# Finding IP address"
-ip=`doctl compute droplet list | grep $host | awk '{ print $3 }'`
+ip=`doctl compute droplet get $did | awk 'NR==2 { print $3 }'`
 echo ": $ip"
 
 # Connect quietly and skip strict key because IP address reuse
@@ -41,13 +49,13 @@ $ssh "$df; apt-get -qqy update; apt-get -qy install $pkg > $dir/apt.log 2>&1"
 
 echo "# Cloning $repo -- see $dir/git.log"
 rs="--recurse-submodules"
-$ssh "cd $dir; git clone -b $branch $rs $repo > $dir/git.log 2>&1"
+$ssh "cd $dir; git clone -b $branch $rs $repo $bdir > $dir/git.log 2>&1"
 
 echo "# Starting build in tmux session -- see $dir/build.log"
 echo "# or use 'tmux attach' to connect to build session"
 $ssh tmux new -d -s Galley
 $ssh tmux send-keys -t Galley.0 \
-    "cd\ $dir/$rdir\;\ $cmd\ \|\ tee\ $dir/build.log" ENTER
+    "cd\ $dir/$bdir\;\ $cmd\ \|\ tee\ $dir/build.log" ENTER
 
 # Provide the ssh command as our uncommented output
 echo $ssh

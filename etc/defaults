@@ -1,18 +1,24 @@
 # etc/defaults -- You can source this in your configs and then
-# override variables as you wish--see etc/example for an example
+# override variables as you wish--see etc/example for an example.
 #
 
+# Root directory
+dir=/build
+
+# Build directory--this is where your project will be cloned under
+# under $dir. You don't need to change this unless your project
+# expects its containing directory to have a certain name.
+bdir=galley
+
 # Specifying a branch is almost required; galley will not figure out the git
-# branch you want to build unless it is main
+# branch you want to build unless it is main (or you change the default here)
 branch=main
 repo=https://github.com/fuzz/galley.git
 
-# Spaces and other special characters *must* be escaped and
-# double quoted
-cmd="ls\ -alh"
 
-# Build root directory
-dir=/build
+# Build command--spaces and other special characters *must* be escaped and
+# double quoted if used
+cmd="ls\ -alh"
 
 ## Digital Ocean begin ##
 host=galley
@@ -32,7 +38,7 @@ size=c-2
 #
 # How long to sleep to allow droplet time to complete setup--30 seconds seems
 # to work well, but if ssh times out or apt complains about another process
-# having a lock or cmake is missing you should increase this
+# having a lock or cmake is missing you can increase this
 sleep=30
 ## Digital Ocean end ##
 
