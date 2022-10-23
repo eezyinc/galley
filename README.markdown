@@ -6,10 +6,11 @@ Ubuntu on Digital Ocean.
 
 ## Setup
 
-Galley is meant to be cloned into `~/.config/galley`. See `etc/default` for
-variables and their default values; see `etc/example` for an example config.
-You'll want to put the md5 hash of one of your Digital Ocean public ssh keys in
-the `GALLEY_KEY` environment variable or override the variable `key` with it in
+Galley is meant to be cloned into `~/.config/galley`, but you may set
+`GALLEY_PATH` instead if you prefer. See `etc/default` for config variables and
+their default values; see `etc/example` for an example config. You'll need to
+put the md5 hash of one of your Digital Ocean public ssh keys in the
+`GALLEY_KEY` environment variable or override the variable `key` with it in
 your config. You can get the md5 hash
 [here](https://cloud.digitalocean.com/account/security).
 

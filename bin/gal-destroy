@@ -1,7 +1,9 @@
 #!/bin/sh
 
-[ -f $HOME/.config/galley/etc/$1 ] || \
-    { echo "missing ~/.config/galley/etc/$1 --maybe copy 'example'?"; exit 1; }
-. $HOME/.config/galley/etc/$1
+path="${GALLEY_PATH:-$HOME/.config/galley}"
+
+[ -f $path/etc/$1 ] || \
+    { echo "missing $path/etc/$1 --maybe copy 'example'?"; exit 1; }
+. $path/etc/$1
 
 doctl compute droplet delete $host

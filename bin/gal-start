@@ -1,8 +1,10 @@
 #!/bin/sh
 
-[ -f $HOME/.config/galley/etc/$1 ] || \
-    { echo "missing ~/.config/galley/etc/$1--copy 'example'?"; exit 1; }
-. $HOME/.config/galley/etc/$1
+path="${GALLEY_PATH:-$HOME/.config/galley}"
+
+[ -f $path/etc/$1 ] || \
+    { echo "missing $path/etc/$1--copy 'example'?"; exit 1; }
+. $path/etc/$1
 
 # We ignore the output of the create command because it sometimes returns
 # the previous IP address of $host.
