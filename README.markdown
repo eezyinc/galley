@@ -17,21 +17,27 @@ You will also need
 [doctl](https://docs.digitalocean.com/reference/doctl/how-to/install)
 installed.
 
+You may want to link or copy `bin/gal` into your `PATH` for convenience.
+
 ## Usage
 
-`bin/start <config>` will start a Digital Ocean droplet, install required packages,
+`gal s default` and `gal d default` should work without further configuration
+if you have a valid `GALLEY_KEY` in your environment, but you probably at least
+want to use a droplet with more CPUs.
+
+### start
+
+`gal s <config>` will start a Digital Ocean droplet, install required packages,
 clone seastar + dpdk and begin the build in a tmux session. You will find logs
 in `/build/apt.log` `/build/build.log` and `/build/git.log`. An ssh command to
-connect to the server will be provided when `bin/start` completes. Use `tmux
+connect to the server will be provided when `gal start` completes. Use `tmux
 attach` to connect to the build session or `tail -f /build/build.log` if you
 prefer.
 
-`bin/destroy <config>` will destroy the Digital Ocean droplet started by
-`bin/start`. Note if you run `bin/start` on a config more than once before
-running `bin/destroy` it will create multiple droplets and you will have to
-destroy them manually--the droplet IDs will be provided in `bin/destroy`'s
-error message.
+### destroy
 
-`bin/start default` and `bin/destroy default` should work without further
-configuration if you have a valid `GALLEY_KEY` in your environment, but you
-probably at least want to use a droplet with more CPUs.
+`gal d <config>` will destroy the Digital Ocean droplet started by
+`gal start`. Note if you run `gal start` on a config more than once before
+running `gal destroy` it will create multiple droplets and you will have to
+destroy them manually--the droplet IDs will be provided in `gal destroy`'s
+error message.

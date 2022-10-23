@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case "$1" in
+    d|destroy) $HOME/.config/bin/gal-destroy $2
+    ;;
+    s|start) $HOME/.config/bin/gal-start $2
+    ;;
+esac
