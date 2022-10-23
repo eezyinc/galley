@@ -30,8 +30,8 @@ You may wish to link or copy `bin/gal` into your `PATH` for convenience.
 
 If you fork the project and only add files (don't modify the included files)
 you can easily manage your configs in the same repo without worrying about
-merge conflicts when syncing with the upstream repo. If you want to change
-defaults copy `etc/defaults` to a new file and source that one instead.
+merge conflicts when syncing with the upstream repo. See `etc/defaults` for
+more details.
 
 ## 💣 Alert 🚨
 
