@@ -5,7 +5,9 @@ droplet, clones your project and initiates the build in a remote `tmux`
 session. Use 48 CPUs to build while keeping your laptop cool with vintage
 analog systems administration technology--it's like riding a code velocipede.
 
-![BBS SysOps managing Their Systems](https://en.wikipedia.org/wiki/Velocipede#/media/File:The_American_Velocipede.jpg "Is this ...Kubernetes?")
+![BBS SysOps managing Their
+Systems](https://pinecab.com/assets/images/velocipede.jpg "Is this
+...Kubernetes?")
 
 ## Setup
 
