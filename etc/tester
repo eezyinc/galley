@@ -4,8 +4,6 @@
 . $path/etc/defaults
 
 host=tester
-size=c-2
-sleep=45
 
 pkg='autogen cmake g++ guile-2.2 libidn11-dev libnuma-dev libtool libunbound-dev m4 ninja-build pkg-config stow trousers xutils-dev'
 

@@ -35,8 +35,12 @@ more details.
 
 ## 💣 Alert 🚨
 
-Do not use Galley for production systems. Also do not forget to
-turn off that 48-CPU build host when you're finished with it.
+Galley is for building software and similar tasks, not for managing production
+infrastructure.
+
+The minimum charge for a droplet is one hour--there are options in
+`etc/defaults` ranging from $0.01USD/hr to $1.50USD/hr. Do not forget to turn
+off that 48-CPU build host when you're finished with it.
 
 ## Usage
 
@@ -70,3 +74,10 @@ ID to `gal rm`.
 
 `gal r <ID>` is an alias for `doctl compute droplet delete <ID>` and will
 delete the droplet specified by the ID. Use `gal ls` to find droplet IDs.
+
+## Testing
+
+Run `bin/gal-test` for an end-to-end test--it will take a few minutes. Note
+that this runs live on Digital Ocean and you will be charged, albeit only
+$0.01USD. `bin/gal-test` is primarily intended for use when working on Galley
+itself; it likely provides no benefit to an end user.

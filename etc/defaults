@@ -11,6 +11,8 @@
 #
 
 ## Digital Ocean begin ##
+#
+# A unique host name is not required
 host=galley
 image=ubuntu-22-04-x64
 #
@@ -19,17 +21,21 @@ image=ubuntu-22-04-x64
 key=$GALLEY_KEY
 region=sfo3
 #
-# c-2  is CPU optimized, 2 CPUs, $42/mo in Oct 2022
-# c-4  is CPU optimized, 4 CPUs, $84/mo in Oct 2022
-# c-48 is CPU optimized, 48 CPUS, $1500/mo in Oct 2022
-# s-1vcpu-1gb is a basic 1 CPU droplet, $6/mo in Oct 2022
+# Note that while Digital Ocean droplets are metered the
+# minimum charge is one hour
+# c-2  is CPU optimized, 2 CPUs, $42/mo ($0.06250/hr) in Oct 2022
+# c-4  is CPU optimized, 4 CPUs, $84/mo ($0.12500/hr) in Oct 2022
+# c-48 is CPU optimized, 48 CPUS, $1008/mo ($1.50/hr) in Oct 2022
+# s-1vcpu-1gb is Basic, 1 CPU, $6/mo ($0.00893/hr) in Oct 2022
 # See 'doctl compute size list' for more options
-size=c-2
+size=s-1vcpu-1gb
 #
-# How long to sleep to allow droplet time to complete setup--30 seconds seems
-# to work well, but if ssh times out or apt complains about another process
-# having a lock or cmake is missing you can increase this
-sleep=30
+# How long to sleep to allow droplet time to complete setup--30 seconds usually
+# works well, but 45 is better when response times are slow. If ssh times out
+# or apt complains about another process having a lock or build tools are
+# missing you can increase this. If you aren't installing any Ubuntu packages
+# you can decrease this.
+sleep=45
 ## Digital Ocean end ##
 
 # Ubuntu (Debian) packages to install prior to build

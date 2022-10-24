@@ -3,6 +3,7 @@
 
 . $path/etc/defaults
 
+# A unique host name is not required
 host=example
 
 branch=main
