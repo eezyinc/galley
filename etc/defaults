@@ -1,13 +1,13 @@
 # etc/defaults -- Source this in your configs and then override variables as
-# you wish--see etc/example for an example. If you desire different default
-# values it is advised to either
+# you wish. See etc/example and etc/seastar for examples. If you desire
+# different default values it is advised to either
 #
 # 1. copy this file, make changes there and source that in your configs instead
 # 2. source this file in another file, make changes there, source that instead
 #
-# the latter option being preferred as future upstream additions to this file
-# will be passed through. Or just make changes here and deal with merge
-# conflicts.
+# the latter option being preferred as non-overridden future upstream changes
+# to this file will be passed through. Or just make changes here and deal with
+# merge conflicts.
 #
 
 ## Digital Ocean begin ##
@@ -44,9 +44,9 @@ pkg=
 # Root directory
 dir=/build
 
-# Build directory--this is where your project will be cloned under
-# under $dir. You don't need to change this unless your project
-# expects its containing directory to have a certain name.
+# Build directory--this is where your project will be cloned under $dir; you
+# don't need to change this unless your project expects its containing
+# directory to have a certain name
 bdir=galley
 
 # Specifying a branch is almost required; galley will not figure out the git
