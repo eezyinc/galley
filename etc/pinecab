@@ -1,0 +1,21 @@
+# pinecab.com config -- set up a web server, pull the site from a git repo
+# and start the certbot process in tmux
+#
+
+. $path/etc/defaults
+
+host=pinecab
+
+pkg='nginx certbot'
+
+dir=/var/www
+bdir=pinecab
+
+branch=main
+repo=https://github.com/fuzz/pinecab-deploy.git
+
+# Build command--spaces, semicolons and perhaps other special characters *must*
+# be escaped and double quoted if used
+na=/etc/nginx/sites-available
+ne=/etc/nginx/sites-enabled
+cmd="rm\ $ne/default\;\ mv\ nginx.conf\ $na/pinecab\;\ ln\ -s\ $na/pinecab\ $ne/pinecab\;\ certbot\ certonly\ --standalone\;\ systemctl\ start\ nginx"
