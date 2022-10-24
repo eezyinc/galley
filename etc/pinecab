@@ -1,21 +1,36 @@
-# pinecab.com config -- set up a web server, pull the site from a git repo
-# and start the certbot process in tmux
+# pinecab.com config -- set up a web server, pull site from a git repo,
+# configure nginx and get an SSL certificate from certbot
+#
+# This isn't how Galley is meant to be used. If you go this route you may want
+# to remove the web server's didfile from run/ so you don't accidentally delete
+# it. You may also consider setting up a cron job to pull from the git repo
+# periodically for auto deploy.
 #
 
 . $path/etc/defaults
 
-host=pinecab
-
+# For this config $host should be the name of the host for which you will be
+# requesting a certificate through certbot--certbot will fail if this does not
+# resolve to the IP address of the droplet
+host=pinecab.com
+size=s-1vcpu-512mb-10gb
 pkg='nginx certbot'
 
 dir=/var/www
-bdir=pinecab
-
+bdir=$host
 branch=main
 repo=https://github.com/fuzz/pinecab-deploy.git
 
 # Build command--spaces, semicolons and perhaps other special characters *must*
 # be escaped and double quoted if used
+certbot_opts="--standalone\ --noninteractive\ --agree-tos\ --register-unsafely-without-email"
+certbot="certbot\ \certonly\ $certbot_opts\ -d\ $host"
+
+start="systemctl\ start\ nginx"
+stop="systemctl\ stop\ nginx"
+
 na=/etc/nginx/sites-available
 ne=/etc/nginx/sites-enabled
-cmd="rm\ $ne/default\;\ mv\ nginx.conf\ $na/pinecab\;\ ln\ -s\ $na/pinecab\ $ne/pinecab\;\ certbot\ certonly\ --standalone\;\ systemctl\ start\ nginx"
+link="rm\ $ne/default\;\ cp\ nginx.conf\ $na/$host\;\ ln\ -s\ $na/$host\ $ne/$host"
+
+cmd="$stop\;\ sleep\ 2\;\ $link\;\ $certbot\;\ $start"

@@ -26,7 +26,8 @@ region=sfo3
 # c-2  is CPU optimized, 2 CPUs, $42/mo ($0.06250/hr) in Oct 2022
 # c-4  is CPU optimized, 4 CPUs, $84/mo ($0.12500/hr) in Oct 2022
 # c-48 is CPU optimized, 48 CPUS, $1008/mo ($1.50/hr) in Oct 2022
-# s-1vcpu-1gb is Basic, 1 CPU, $6/mo ($0.00893/hr) in Oct 2022
+# s-1vcpu-1gb is Basic, 1G, 1 CPU, $6/mo ($0.00893/hr) in Oct 2022
+# s-1vcpu-512mb-10gb is Basic, 512M, 1 CPU, $4/mo in Oct 2022
 # See 'doctl compute size list' for more options
 size=s-1vcpu-1gb
 #
