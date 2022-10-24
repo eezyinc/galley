@@ -10,23 +10,6 @@
 # conflicts.
 #
 
-# Root directory
-dir=/build
-
-# Build directory--this is where your project will be cloned under
-# under $dir. You don't need to change this unless your project
-# expects its containing directory to have a certain name.
-bdir=galley
-
-# Specifying a branch is almost required; galley will not figure out the git
-# branch you want to build unless it is main (or you change the default here)
-branch=main
-repo=https://github.com/fuzz/galley.git
-
-# Build command--spaces and other special characters *must* be escaped and
-# double quoted if used
-cmd="ls\ -alh"
-
 ## Digital Ocean begin ##
 host=galley
 image=ubuntu-22-04-x64
@@ -49,5 +32,22 @@ size=c-2
 sleep=30
 ## Digital Ocean end ##
 
-# Packages to install prior to build
+# Ubuntu (Debian) packages to install prior to build
 pkg=
+
+# Root directory
+dir=/build
+
+# Build directory--this is where your project will be cloned under
+# under $dir. You don't need to change this unless your project
+# expects its containing directory to have a certain name.
+bdir=galley
+
+# Specifying a branch is almost required; galley will not figure out the git
+# branch you want to build unless it is main (or you change the default)
+branch=main
+repo=https://github.com/fuzz/galley.git
+
+# Build command--spaces and other special characters *must* be escaped and
+# double quoted if used
+cmd="ls\ -alh"

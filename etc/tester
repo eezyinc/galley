@@ -1,20 +1,17 @@
-# example config for Seastar
+# test config
 #
 
 . $path/etc/defaults
 
-host=seabuild
-size=c-4
+host=tester
+size=c-2
 sleep=45
 
 pkg='autogen cmake g++ guile-2.2 libidn11-dev libnuma-dev libtool libunbound-dev m4 ninja-build pkg-config stow trousers xutils-dev'
 
-# Currently a broken URL for zlib requires using
-branch=seamake
-repo=https://github.com/fuzz/seastar.git
-# branch=master
-# repo=https://github.com/scylladb/seastar.git
+branch=main
+repo=https://github.com/fuzz/galley.git
 
 # Build command--spaces and other special characters *must* be escaped and
 # double quoted if used--see 'etc/example'
-cmd=./cooking.sh
+cmd="touch\ run/success"
