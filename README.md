@@ -5,8 +5,8 @@ droplet, clones your project and initiates the build in a remote `tmux`
 session. Use 48 CPUs to build while keeping your laptop cool with vintage
 analog systems administration technology.
 
-![BBS SysOps managing Their
-Systems](https://pinecab.com/assets/images/velocipede.jpg "control bicycles")
+![Vintage gentlemen riding
+velocipedes](https://pinecab.com/assets/images/velocipede.jpg "controlbikes")
 
 ## Setup
 
