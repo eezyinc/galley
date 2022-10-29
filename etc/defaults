@@ -17,7 +17,7 @@ host=galley
 image=ubuntu-22-04-x64
 #
 # md5 hash of a public ssh key uploaded to your Digital Ocean account
-# See README.markdown for more details
+# See 'doctl compute ssh-key list' and README.markdown for more details
 key=$GALLEY_KEY
 region=sfo3
 #
