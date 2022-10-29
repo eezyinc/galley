@@ -9,4 +9,4 @@ size=c-2
 
 # Build command--spaces, pipes, semicolons and other special characters *must*
 # be escaped and double quoted if used
-cmd="curl\ https://gist.githubusercontent.com/fuzz/40d345bda5c6e52b4b0a1635520dee37/raw/49a8f845b9ddb9eae6a45e6ef7b2925fb0b9262d/crossplane-setup.sh\ \|\ \bash"
+cmd="curl\ https://raw.githubusercontent.com/fuzz/crossplane-setup/main/crossplane-setup.sh\ \|\ sh"
