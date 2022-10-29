@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 
 path="${GALLEY_PATH:-$HOME/.config/galley}"
@@ -47,9 +47,14 @@ echo "# Installing packages -- see $dir/apt.log"
 df="export DEBIAN_FRONTEND=noninteractive"
 $ssh "$df; apt-get -qqy update; apt-get -qy install $pkg > $dir/apt.log 2>&1"
 
-echo "# Cloning $repo -- see $dir/git.log"
-rs="--recurse-submodules"
-$ssh "cd $dir; git clone -b $branch $rs $repo $bdir > $dir/git.log 2>&1"
+if [[ -z "${repo}" ]]; then
+    echo "# Skipping repo"
+    $ssh "mkdir $dir/$bdir"
+else
+    echo "# Cloning $repo -- see $dir/git.log"
+    rs="--recurse-submodules"
+    $ssh "cd $dir; git clone -b $branch $rs $repo $bdir > $dir/git.log 2>&1"
+fi
 
 echo "# Starting build in tmux session -- see $dir/build.log"
 echo "# or use 'tmux attach' to connect to build session"

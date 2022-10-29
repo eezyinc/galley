@@ -53,8 +53,8 @@ bdir=galley
 # Specifying a branch is almost required; galley will not figure out the git
 # branch you want to build unless it is main (or you change the default)
 branch=main
-repo=https://github.com/fuzz/galley.git
+repo=
 
-# Build command--spaces and other special characters *must* be escaped and
-# double quoted if used
+# Build command--spaces, pipes, semicolons and other special characters *must*
+# be escaped and double quoted if used
 cmd="ls\ -alh"

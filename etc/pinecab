@@ -21,7 +21,7 @@ bdir=$host
 branch=main
 repo=https://github.com/fuzz/pinecab-deploy.git
 
-# Build command--spaces, semicolons and perhaps other special characters *must*
+# Build command--spaces, pipes, semicolons and other special characters *must*
 # be escaped and double quoted if used
 certbot_opts="--standalone\ --noninteractive\ --agree-tos\ --register-unsafely-without-email"
 certbot="certbot\ \certonly\ $certbot_opts\ -d\ $host"

@@ -10,6 +10,6 @@ pkg='autogen cmake g++ guile-2.2 libidn11-dev libnuma-dev libtool libunbound-dev
 branch=main
 repo=https://github.com/fuzz/galley.git
 
-# Build command--spaces and other special characters *must* be escaped and
-# double quoted if used--see 'etc/example'
+# Build command--spaces, pipes, semicolons and other special characters *must*
+# be escaped and double quoted if used
 cmd="touch\ run/success"

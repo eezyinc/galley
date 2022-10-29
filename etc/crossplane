@@ -7,9 +7,6 @@
 host=crossplane
 size=c-2
 
-branch=main
-repo=https://github.com/fuzz/galley.git
-
-# Build command--spaces and other special characters *must* be escaped and
-# double quoted if used
-cmd="curl\ https://gist.githubusercontent.com/fuzz/40d345bda5c6e52b4b0a1635520dee37/raw/ce0568e1ed37c3321b82fd960923c97994f2746b/crossplane-setup.sh\ \| \bash"
+# Build command--spaces, pipes, semicolons and other special characters *must*
+# be escaped and double quoted if used
+cmd="curl\ https://gist.githubusercontent.com/fuzz/40d345bda5c6e52b4b0a1635520dee37/raw/49a8f845b9ddb9eae6a45e6ef7b2925fb0b9262d/crossplane-setup.sh\ \|\ \bash"

@@ -9,6 +9,6 @@ host=example
 branch=main
 repo=https://github.com/fuzz/galley.git
 
-# Build command--spaces and other special characters *must* be escaped and
-# double quoted if used
+# Build command--spaces, pipes, semicolons and other special characters *must*
+# be escaped and double quoted if used
 cmd="cat\ README.markdown"

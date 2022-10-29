@@ -9,8 +9,6 @@ analog systems administration technology--it's like riding a code velocipede.
 Systems](https://pinecab.com/assets/images/velocipede.jpg "Is this
 a kubernetes?")
 
-__100% Certified Organic POSIX!__
-
 ## Setup
 
 Galley is meant to be cloned into `~/.config/galley`, but you may set
