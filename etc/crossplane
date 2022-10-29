@@ -3,9 +3,8 @@
 
 . $path/etc/defaults
 
-# A unique host name is not required
 host=crossplane
-size=c-2
+size=s-2vcpu-2gb
 
 # Build command--spaces, pipes, semicolons and other special characters *must*
 # be escaped and double quoted if used
