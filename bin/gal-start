@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 
 path="${GALLEY_PATH:-$HOME/.config/galley}"
@@ -47,7 +47,7 @@ echo "# Installing packages -- see $dir/apt.log"
 df="export DEBIAN_FRONTEND=noninteractive"
 $ssh "$df; apt-get -qqy update; apt-get -qy install $pkg > $dir/apt.log 2>&1"
 
-if [[ -z "${repo}" ]]; then
+if [ -z "${repo}" ]; then
     echo "# Skipping repo"
     $ssh "mkdir $dir/$bdir"
 else
