@@ -72,9 +72,27 @@ ID to `gal rm`.
 `gal r <ID>` is an alias for `doctl compute droplet delete <ID>` and will
 delete the droplet specified by the ID. Use `gal ls` to find droplet IDs.
 
+## Included Configs
+
+In `etc/`:
+* `crossplane` sets up "local" [Crossplane](https://crossplane.io) installation
+* `defaults` is where default config variables live
+* `example` is an example
+* `pinecab` sets up a web server
+* `seastar` sets up a build environment for [Seastar](https://seastar.io)
+* `tester` is used for testing while working on Galley itself
+
 ## Testing
 
 Run `bin/gal-test` for an end-to-end test--it will take a few minutes. Note
 that this runs live on Digital Ocean and you will be charged, albeit only
 $0.01USD. `bin/gal-test` is primarily intended for use when working on Galley
 itself; it likely provides no benefit to an end user.
+
+## Motivation
+
+I was trying to set up a working clean build environment for Seastar and my
+laptop kept getting hot, so I figured I'd use a cloud node. I wrote a quick
+script to start up a Digital Ocean droplet, pull Seastar from GitHub and start
+the build in a tmux session that I'd check on later. Once I had that I kept
+finding other uses for it and here we are.
