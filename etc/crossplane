@@ -5,7 +5,9 @@
 
 host=crossplane
 size=s-2vcpu-2gb
+repo=https://github.com/fuzz/crossplane-setup
+branch=main
 
 # Build command--spaces, pipes, semicolons and other special characters *must*
 # be escaped and double quoted if used
-cmd="curl\ https://raw.githubusercontent.com/fuzz/crossplane-setup/main/crossplane-setup.sh\ \|\ sh"
+cmd=./crossplane-setup.sh
