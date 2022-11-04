@@ -3,23 +3,23 @@
 
 path="${GALLEY_PATH:-$HOME/.config/galley}"
 
-. $path/etc/defaults
+. "$path"/etc/defaults
 
 echo "Starting test, this will take a few minutes..."
-ssh=`$path/bin/gal start tester | tail -1`
+ssh=$("$path"/bin/gal start tester | tail -1)
 
 sleep 10
 
-assert=`$ssh test -f $dir/$bdir/run/success && echo "PASS"`
+assert=$("$ssh" test -f "$dir"/"$bdir"/run/success && echo "PASS")
 
-echo $assert
+echo "$assert"
 
-if [ $assert == "PASS" ]; then
+if [ "$assert" = "PASS" ]; then
     echo "PASS: droplet created, repo cloned, tmux started, build command run"
     echo "Deleting test host"
-    $path/bin/gal delete tester
+    "$path"/bin/gal delete tester
 else
     echo "FAIL: see log files in $dir (assuming we made it that far)"
     echo "Run 'gal d tester' when finished to delete test host"
-    echo $ssh
+    echo "$ssh"
 fi

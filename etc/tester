@@ -1,7 +1,7 @@
 # test config
 #
 
-. $path/etc/defaults
+. "$path"/etc/defaults
 
 host=tester
 

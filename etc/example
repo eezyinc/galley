@@ -1,7 +1,7 @@
 # example config for Galley
 #
 
-. $path/etc/defaults
+. "$path"/etc/defaults
 
 # A unique host name is not required
 host=example

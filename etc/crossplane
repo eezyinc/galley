@@ -1,7 +1,7 @@
 # Crossplane config for Galley
 #
 
-. $path/etc/defaults
+. "$path"/etc/defaults
 
 host=crossplane
 size=s-2vcpu-2gb

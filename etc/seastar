@@ -1,7 +1,7 @@
 # example config for Seastar
 #
 
-. $path/etc/defaults
+. "$path"/etc/defaults
 
 host=seabuild
 

@@ -3,16 +3,16 @@
 
 path="${GALLEY_PATH:-$HOME/.config/galley}"
 config=$1
-configfile=$path/etc/$config
-didfile=$path/run/$config.did
+configfile="$path/etc/$config"
+didfile="$path/run/$config.did"
 
-[ -f $didfile ] && \
+[ -f "$didfile" ] && \
     { echo "$config already running? check $didfile"; exit 1; }
 
-[ -f $configfile ] || \
+[ -f "$configfile" ] || \
     { echo "missing $configfile--copy $path/run/example?"; exit 1; }
 
-. $configfile
+. "$configfile"
 
 # We ignore the IP address from the create command because it sometimes returns
 # the previous IP address of $host.
@@ -25,16 +25,16 @@ didfile=$path/run/$config.did
 # and gives Digital Ocean a little more time to ascertain the correct IP
 # address.
 echo "# Creating droplet $image $size $host"
-touch $didfile
-did=`doctl compute droplet create --region $region --image $image \
-    --size $size --ssh-keys $key --wait $host | awk 'NR==2 { print $1 }'`
-echo $did > $didfile
+touch "$didfile"
+did=$(doctl compute droplet create --region "$region" --image "$image" \
+    --size "$size" --ssh-keys "$key" --wait "$host" | awk 'NR==2 { print $1 }')
+echo "$did" > "$didfile"
 
 echo "# Waiting $sleep seconds for $host to be ready..."
-sleep $sleep
+sleep "$sleep"
 
 printf '%s' "# Finding IP address"
-ip=`doctl compute droplet get $did | awk 'NR==2 { print $3 }'`
+ip=$(doctl compute droplet get "$did" | awk 'NR==2 { print $3 }')
 echo ": $ip"
 
 # Connect quietly and skip strict key because IP address reuse
@@ -63,4 +63,4 @@ $ssh tmux send-keys -t Galley.0 \
     "cd\ $dir/$bdir\;\ $cmd\ \|\ tee\ $dir/build.log" ENTER
 
 # Provide the ssh command as our uncommented output
-echo $ssh
+echo "$ssh"

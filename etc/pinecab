@@ -7,7 +7,7 @@
 # periodically for auto deploy.
 #
 
-. $path/etc/defaults
+. "$path"/etc/defaults
 
 # For this config $host should be the name of the host for which you will be
 # requesting a certificate through certbot--certbot will fail if this does not
@@ -17,7 +17,7 @@ size=s-1vcpu-512mb-10gb
 pkg='nginx certbot'
 
 dir=/var/www
-bdir=$host
+bdir="$host"
 branch=main
 repo=https://github.com/fuzz/pinecab-deploy.git
 
