@@ -4,9 +4,11 @@
 path="${GALLEY_PATH:-$HOME/.config/galley}"
 
 case "$1" in
+    b|boot) "$path"/bin/gal-boot "$2"
+    ;;
     d|delete) "$path"/bin/gal-delete "$2"
     ;;
-    s|start) "$path"/bin/gal-start "$2"
+    s|ssh) "$path"/bin/gal-ssh "$2"
     ;;
     l|ls) doctl compute droplet ls
     ;;

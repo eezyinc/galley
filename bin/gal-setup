@@ -1,0 +1,66 @@
+#!/bin/sh
+#
+
+path="${GALLEY_PATH:-$HOME/.config/galley}"
+config=$1
+configfile="$path/etc/$config"
+didfile="$path/run/$config.did"
+
+[ -f "$didfile" ] && \
+    { echo "$config already running? check $didfile"; exit 1; }
+
+[ -f "$configfile" ] || \
+    { echo "missing $configfile--copy $path/run/example?"; exit 1; }
+
+. "$configfile"
+
+# We ignore the IP address from the create command because it sometimes returns
+# the previous IP address of $host.
+#
+# We sleep because the new $host isn't ready right away to accept ssh
+# connections and so we don't conflict with the $host running apt on itself at
+# startup.
+#
+# We sleep before getting the IP address as it doesn't slow things down
+# and gives Digital Ocean a little more time to ascertain the correct IP
+# address.
+echo "# Creating droplet $image $size $host"
+touch "$didfile"
+did=$(doctl compute droplet create --region "$region" --image "$image" \
+    --size "$size" --ssh-keys "$key" --wait "$host" | awk 'NR==2 { print $1 }')
+echo "$did" > "$didfile"
+
+echo "# Waiting $sleep seconds for $host to be ready..."
+sleep "$sleep"
+
+printf '%s' "# Finding IP address"
+ip=$(doctl compute droplet get "$did" | awk 'NR==2 { print $3 }')
+echo ": $ip"
+
+# Connect quietly and skip strict key because IP address reuse
+ssh="ssh -q -o StrictHostKeyChecking=no root@$ip"
+
+echo "# Suppressing login messages and creating build directory"
+$ssh "touch .hushlogin; mkdir -p $dir"
+
+echo "# Installing packages -- see $dir/apt.log"
+df="export DEBIAN_FRONTEND=noninteractive"
+$ssh "$df; apt-get -qqy update; apt-get -qy install $pkg > $dir/apt.log 2>&1"
+
+if [ -z "${repo}" ]; then
+    echo "# Skipping repo"
+    $ssh "mkdir $dir/$bdir"
+else
+    echo "# Cloning $repo -- see $dir/git.log"
+    rs="--recurse-submodules"
+    $ssh "cd $dir; git clone -b $branch $rs $repo $bdir > $dir/git.log 2>&1"
+fi
+
+echo "# Starting build in tmux session -- see $dir/build.log"
+echo "# or use 'tmux attach' to connect to build session"
+$ssh tmux new -d -s Galley
+$ssh tmux send-keys -t Galley.0 \
+    "cd\ $dir/$bdir\;\ $cmd\ \|\ tee\ $dir/build.log" ENTER
+
+# Provide the ssh command as our uncommented output
+echo "$ssh"
